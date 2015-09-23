@@ -1,5 +1,8 @@
-##User Entity
+User Entity
+###########
 
+.. code-block:: php
+    
     /**
      * @ORM\Entity
      */
@@ -14,7 +17,10 @@
     }
 
 
-##Credentials Entity
+Credentials Entity
+##################
+
+.. code-block:: php
 
     /**
      * @ORM\Entity
@@ -30,7 +36,10 @@
         protected $id;
     }
 
-##Configuration Example
+Configuration Example
+#####################
+
+.. code-block:: yaml
 
     #app/config.yml
 
