@@ -1,0 +1,6 @@
+sauth_logout:
+    path: /logout
+
+sauth_connect:
+    path:     /connect/{service}
+    defaults: { _controller: HeidiLabsSauthBundle:Default:index }

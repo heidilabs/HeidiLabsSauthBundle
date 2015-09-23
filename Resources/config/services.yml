@@ -1,0 +1,14 @@
+services:
+    sauth.user_manager:
+        class: HeidiLabs\SauthBundle\Security\UserManager
+        arguments: ["@doctrine", "%sauth.user_class%", "%sauth.credentials_class%"]
+
+    sauth.oauth_manager:
+        class: HeidiLabs\SauthBundle\OAuthService\OAuthServiceManager
+        arguments: ["%sauth.services%"]
+
+    sauth.authenticator:
+        class: HeidiLabs\SauthBundle\Security\SauthAuthenticator
+        public: false
+        arguments: ["@sauth.oauth_manager", "%sauth.allow_registration%", "@security.http_utils"]
+

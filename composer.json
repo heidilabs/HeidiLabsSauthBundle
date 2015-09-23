@@ -1,0 +1,22 @@
+{
+    "name": "heidilabs\sauth-bundle",
+    "description": "Symfony Social Auth Bundle",
+    "keywords": ["oauth", "symfony"],
+    "homepage": "https://github.com/heidilabs/HeidiLabsSauthBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Erika Heidi",
+            "email": "erika@heidilabs.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
+    },
+    "autoload": {
+        "psr-4": { "Sauth\\": "src/" }
+    }
+}
