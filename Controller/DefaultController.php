@@ -10,6 +10,6 @@ class DefaultController extends Controller
     public function indexAction($service)
     {
         //redirect to index
-        return new RedirectResponse($this->generateUrl('homepage'));
+        return new RedirectResponse($this->generateUrl($this->getParameter('sauth.home')));
     }
 }

@@ -26,6 +26,7 @@ class HeidiLabsSauthExtension extends Extension
         $container->setParameter('sauth.user_class', $config['user_class']);
         $container->setParameter('sauth.credentials_class', $config['credentials_class']);
         $container->setParameter('sauth.allow_registration', $config['allow_registration']);
+        $container->setParameter('sauth.home', $config['home']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');

@@ -17,6 +17,7 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('heidi_labs_sauth');
 
         $rootNode->children()
+            ->scalarNode('home')->defaultValue('homepage')->end()
             ->scalarNode('user_class')->defaultValue('AppBundle\Entity\User')->end()
             ->scalarNode('credentials_class')->defaultValue('AppBundle\Entity\Credentials')->end()
             ->booleanNode('allow_registration')->defaultValue(true)->end()
