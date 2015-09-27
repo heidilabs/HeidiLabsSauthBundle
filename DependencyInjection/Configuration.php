@@ -22,6 +22,7 @@ class Configuration implements ConfigurationInterface
             ->booleanNode('allow_registration')->defaultValue(true)->end()
             ->arrayNode('services')
                     ->append($this->getServiceNode('google', 'HeidiLabs\SauthBundle\OAuthService\GoogleService'))
+                    ->append($this->getServiceNode('github', 'HeidiLabs\SauthBundle\OAuthService\GithubService'))
             ->end();
 
         return $treeBuilder;

@@ -7,12 +7,16 @@ namespace HeidiLabs\SauthBundle\OAuthService;
 
 
 use HeidiLabs\SauthBundle\Model\OauthServiceInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class OAuthServiceManager
 {
+    /** @var  array $services */
     protected $services;
+    /** @var  SessionInterface $session */
+    protected $session;
 
-    public function __construct(array $services)
+    public function __construct(array $services, SessionInterface $session)
     {
         foreach ($services as $serviceId => $options) {
             $class = $options['class'];
@@ -21,7 +25,7 @@ class OAuthServiceManager
             /** @var OauthServiceInterface $service */
             $service = new $class();
             $this->addService($serviceId, $service);
-            $service->setup($config);
+            $service->setup($config, $session);
         }
     }
 

@@ -5,7 +5,7 @@ services:
 
     sauth.oauth_manager:
         class: HeidiLabs\SauthBundle\OAuthService\OAuthServiceManager
-        arguments: ["%sauth.services%"]
+        arguments: ["%sauth.services%", "@session"]
 
     sauth.authenticator:
         class: HeidiLabs\SauthBundle\Security\SauthAuthenticator
