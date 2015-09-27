@@ -40,6 +40,10 @@ class GithubService implements OauthServiceInterface
     const API_BASE = 'https://api.github.com';
     const AUTH_STATE_KEY = 'github_oauth_state';
 
+    /**
+     * @param array $config
+     * @param SessionInterface $session
+     */
     public function setup(array $config, SessionInterface $session)
     {
         $this->session = $session;
@@ -49,13 +53,16 @@ class GithubService implements OauthServiceInterface
         $this->callbackUrl = $config['callback_url'];
     }
 
+    /**
+     * @return string
+     */
     public function getAuthUrl()
     {
         $state = substr(md5(time()), 0, 15);
         $this->session->set(self::AUTH_STATE_KEY, $state);
 
         $parameters = [
-            'client_id' => $this->clientId,
+            'client_id'    => $this->clientId,
             'redirect_uri' => $this->callbackUrl,
             'state'        => $state
         ];
@@ -68,7 +75,6 @@ class GithubService implements OauthServiceInterface
      */
     public function authenticate(TokenInterface $token, UserProviderInterface $userProvider)
     {
-        //POST https://github.com/login/oauth/access_token
         $code = $token->getCredentials();
 
         $response = $this->guzzle->post(self::AUTH_TOKEN_URL, [
@@ -76,10 +82,10 @@ class GithubService implements OauthServiceInterface
                 'Accept' => 'application/json'
             ],
             'form_params' => [
-                'client_id' => $this->clientId,
+                'client_id'     => $this->clientId,
                 'client_secret' => $this->clientSecret,
-                'code' => $code,
-                'state' => $this->session->get(self::AUTH_STATE_KEY)
+                'code'          => $code,
+                'state'         => $this->session->get(self::AUTH_STATE_KEY)
             ]
         ]);
 
@@ -114,11 +120,21 @@ class GithubService implements OauthServiceInterface
         return $this->accessToken;
     }
 
+    /**
+     * @return mixed|null
+     * @throws UnauthorizedException
+     */
     public function getLoggedUser()
     {
         return $this->get('/user');
     }
 
+    /**
+     * @param $endpoint
+     * @param array $parameters
+     * @return mixed|null
+     * @throws UnauthorizedException
+     */
     public function get($endpoint, $parameters = [])
     {
         if (!$this->accessToken) {

@@ -114,7 +114,7 @@ class SauthAuthenticator implements SimplePreAuthenticatorInterface, Authenticat
                 $user = $userProvider->createNew($username);
             }
 
-            $userProvider->saveCredentials($user, $token->getServiceId(), $userId, $token->getCredentials());
+            $userProvider->saveCredentials($user, $token->getServiceId(), $userId, $service->getUserTokens());
         }
 
         return new SauthToken(
